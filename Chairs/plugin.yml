@@ -1,0 +1,12 @@
+name: Chairs
+main: io.github.skepter.chairs.Main
+version: 1.0
+description: Lets you sit on chairs
+author: Skepter
+website: http://skepter.github.io/
+softdepend: [WorldGuard]
+
+commands:
+  chairs:
+    description: Allows you to toggle chairs
+    aliases: [chair]
