@@ -51,7 +51,7 @@ public class ChairListener implements Listener {
 									if(isStair(b)) {
 										Stairs s = (Stairs) b.getState().getData();
 										if(!s.isInverted()) {
-											if(b.getRelative(BlockFace.UP).getType().equals(Material.AIR)) {
+											if(isMaterialHollowForChairs(b.getRelative(BlockFace.UP).getType())) {
 												if(!sittingPlayers.values().contains(b)) {
 													sit(event.getPlayer(), b);
 													return;
@@ -217,6 +217,25 @@ public class ChairListener implements Listener {
 			case WOOD_STAIRS:
 				return true;
 		}
+	}
+	
+	private boolean isMaterialHollowForChairs(Material material) {
+		switch(material) {
+			default:
+				return false;
+			case AIR:
+			case TORCH:
+			case SIGN_POST:
+			case LADDER:
+			case WALL_SIGN:
+			case LEVER:
+			case REDSTONE_TORCH_OFF:
+			case REDSTONE_TORCH_ON:
+			case STONE_BUTTON:
+			case VINE:
+				return true;
+		}
+		
 	}
 	
 	public Location getCenter(Location location) {
