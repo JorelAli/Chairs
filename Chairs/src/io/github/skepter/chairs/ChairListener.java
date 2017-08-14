@@ -76,7 +76,18 @@ public class ChairListener implements Listener {
 	 */
 	private boolean worldGuardCheck(Player player, Block block) {
 		if(Main.hasWorldGuard()) {
-			List<String> regions = Main.getInstance().getConfig().getStringList("regions");
+			List<String> regions = Main.getInstance().getConfig().getStringList("regions-to-deny");
+			List<String> ignoreRegions = Main.getInstance().getConfig().getStringList("regions-to-ignore");
+			
+			for(String region : ignoreRegions) {
+				ProtectedRegion wgRegion = WGBukkit.getPlugin().getRegionManager(player.getWorld()).getRegion(region);
+				if(wgRegion != null) {
+					if(wgRegion.contains(block.getX(), block.getY(), block.getZ())) {
+						return true;
+					}
+				}
+			}
+			
 			for(String region : regions) {
 				ProtectedRegion wgRegion = WGBukkit.getPlugin().getRegionManager(player.getWorld()).getRegion(region);
 				if(wgRegion != null) {
