@@ -1,5 +1,5 @@
 regions-to-deny:
   - spawn
   - arenas
-region-to-ignore:
+regions-to-ignore:
   - poker
